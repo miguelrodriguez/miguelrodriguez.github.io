@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Apps by Miguel Rodriguez — privacy-first tools built with care." />
+  <title>Miguel Rodriguez — Apps</title>
+
+  <style>
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.10);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
+      --line: rgba(255,255,255,.14);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --accent: #7dd3fc;   /* cyan */
+      --accent2: #a78bfa;  /* violet */
+      --good: #34d399;
+      --warn: #fbbf24;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 10% 10%, rgba(125,211,252,.18), transparent 55%),
+        radial-gradient(1000px 600px at 85% 20%, rgba(167,139,250,.16), transparent 60%),
+        radial-gradient(900px 600px at 50% 110%, rgba(52,211,153,.10), transparent 55%),
+        var(--bg);
+      line-height: 1.45;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: none; }
+
+    .wrap{
+      width: min(1100px, 92vw);
+      margin: 0 auto;
+      padding: 36px 0 60px;
+    }
+
+    /* Top bar */
+    .top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.25);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .avatar{
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(125,211,252,.9), rgba(167,139,250,.7) 55%, rgba(255,255,255,.15) 100%);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      flex: 0 0 auto;
+    }
+
+    .brand h1{
+      font-size: 14px;
+      margin: 0;
+      letter-spacing: .3px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .brand p{
+      margin: 0;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .nav{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content:flex-end;
+    }
+
+    .chip{
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size: 13px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .chip:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.22);
+      color: var(--text);
+    }
+
+    /* Hero */
+    .hero{
+      margin-top: 26px;
+      display:grid;
+      grid-template-columns: 1.3fr .7fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .heroCard{
+      padding: 26px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow:hidden;
+    }
+
+    .heroCard:before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(800px 320px at 10% 0%, rgba(125,211,252,.22), transparent 55%),
+        radial-gradient(700px 300px at 80% 20%, rgba(167,139,250,.18), transparent 55%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .heroCard > *{ position:relative; }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dot{
+      width: 8px; height: 8px; border-radius: 999px;
+      background: var(--good);
+      box-shadow: 0 0 0 6px rgba(52,211,153,.12);
+    }
+
+    h2{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 3.3vw, 42px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+    }
+
+    .subtitle{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 60ch;
+    }
+
+    .ctaRow{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      font-size: 14px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.22); }
+
+    .btn.primary{
+      border-color: rgba(125,211,252,.45);
+      background: linear-gradient(180deg, rgba(125,211,252,.18), rgba(167,139,250,.10));
+    }
+
+    .sideCard{
+      padding: 22px;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 12px 45px rgba(0,0,0,.22);
+      display:flex;
+      flex-direction: column;
+      gap: 14px;
+      justify-content: space-between;
+    }
+
+    .sideItem{
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.16);
+      border-radius: 14px;
+      padding: 12px 12px;
+    }
+
+    .sideItem .label{
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .sideItem .value{
+      font-size: 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+    }
+
+    .pill{
+      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      flex: 0 0 auto;
+    }
+
+    /* Section title */
+    .section{
+      margin-top: 28px;
+    }
+    .sectionHeader{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .sectionHeader h3{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .sectionHeader p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Apps grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+    .card{
+      grid-column: span 6;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.22);
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      position: relative;
+      overflow:hidden;
+    }
+    .card:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.24);
+      background: rgba(255,255,255,.06);
+    }
+
+    .cardTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .appName{
+      font-size: 16px;
+      margin: 0;
+      letter-spacing: .2px;
+    }
+    .badge{
+      font-size: 12px;
+      padding: 5px 9px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(0,0,0,.18);
+      color: var(--muted);
+    }
+
+    .card p{
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .linkBtn{
+      padding: 9px 11px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.14);
+      color: var(--text);
+      font-size: 13px;
+      transition: background .15s ease, transform .15s ease, border-color .15s ease;
+    }
+    .linkBtn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Responsive */
+    @media (max-width: 880px){
+      .hero{ grid-template-columns: 1fr; }
+      .card{ grid-column: span 12; }
+      .top{ border-radius: 18px; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <div class="avatar" aria-hidden="true"></div>
+        <div style="min-width:0">
+          <h1>Miguel Rodriguez</h1>
+          <p>iOS apps • privacy-first • crafted for clarity</p>
+        </div>
+      </div>
+
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="chip" href="#apps">Apps</a>
+        <a class="chip" href="#support">Support</a>
+        <a class="chip" href="#privacy">Privacy</a>
+        <a class="chip" href="https://github.com/miguelrodriguez" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </header>
+
+    <section class="hero">
+      <div class="heroCard">
+        <div class="kicker"><span class="dot"></span> Active development</div>
+        <h2>Simple, powerful iOS tools—built with care.</h2>
+        <p class="subtitle">
+          This site hosts the official <strong>Marketing</strong>, <strong>Support</strong> and <strong>Privacy Policy</strong> pages
+          for my apps.
+        </p>
+
+        <div class="ctaRow">
+          <a class="btn primary" href="#apps">Explore apps</a>
+          <a class="btn" href="#support">Get support</a>
+          <a class="btn" href="#privacy">Privacy policies</a>
+        </div>
+      </div>
+
+      <aside class="sideCard">
+        <div class="sideItem">
+          <div class="label">Primary focus</div>
+          <div class="value">
+            Flight sim companion tools
+            <span class="pill">iPhone • iPad</span>
+          </div>
+        </div>
+
+        <div class="sideItem">
+          <div class="label">Support</div>
+          <div class="value">
+            Email-based helpdesk
+            <span class="pill">24–72h</span>
+          </div>
+        </div>
+
+        <div class="sideItem">
+          <div class="label">Privacy approach</div>
+          <div class="value">
+            Minimal data collection
+            <span class="pill">transparent</span>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="apps" class="section">
+      <div class="sectionHeader">
+        <div>
+          <h3>Apps</h3>
+          <p>Marketing, Support and Privacy pages for each app.</p>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- FlightNexus -->
+        <article class="card">
+          <div class="cardTop">
+            <h4 class="appName">FlightNexus</h4>
+            <span class="badge">In development</span>
+          </div>
+          <p>
+            A flight-sim companion that helps you keep a pilot career log, track flights, and stay organized across sessions.
+            <!-- REPLACE with your final description -->
+          </p>
+          <div class="links">
+            <a class="linkBtn" href="/apps/flightnexus/">Marketing</a>
+            <a class="linkBtn" href="/apps/flightnexus/support">Support</a>
+            <a class="linkBtn" href="/apps/flightnexus/privacy">Privacy</a>
+          </div>
+        </article>
+
+        <!-- Add more apps here -->
+        <article class="card">
+          <div class="cardTop">
+            <h4 class="appName">Your Next App</h4>
+            <span class="badge">Coming soon</span>
+          </div>
+          <p>
+            Short description here. Duplicate this card for each app and update links.
+          </p>
+          <div class="links">
+            <a class="linkBtn" href="#" onclick="return false;">Marketing</a>
+            <a class="linkBtn" href="#" onclick="return false;">Support</a>
+            <a class="linkBtn" href="#" onclick="return false;">Privacy</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="support" class="section">
+      <div class="sectionHeader">
+        <div>
+          <h3>Support</h3>
+          <p>Need help? Use the support page for your specific app.</p>
+        </div>
+      </div>
+
+      <div class="heroCard" style="padding:18px;">
+        <p style="margin:0;color:var(--muted);font-size:14px;">
+          For the fastest help, open the <strong>Support</strong> page of the app you’re using and send the requested details.
+          <br><br>
+          General contact: <strong>REPLACE_WITH_YOUR_SUPPORT_EMAIL</strong>
+        </p>
+      </div>
+    </section>
+
+    <section id="privacy" class="section">
+      <div class="sectionHeader">
+        <div>
+          <h3>Privacy</h3>
+          <p>Each app has its own Privacy Policy page.</p>
+        </div>
+      </div>
+
+      <div class="heroCard" style="padding:18px;">
+        <p style="margin:0;color:var(--muted);font-size:14px;">
+          I aim to keep data collection minimal and transparent. Please review the Privacy Policy for each app:
+          <br><br>
+          • <a class="linkBtn" href="/apps/flightnexus/privacy">FlightNexus Privacy Policy</a>
+        </p>
+      </div>
+    </section>
+
+    <footer>
+      <div>© <span id="y"></span> Miguel Rodriguez</div>
+      <div>
+        <a class="chip" href="https://github.com/miguelrodriguez" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
