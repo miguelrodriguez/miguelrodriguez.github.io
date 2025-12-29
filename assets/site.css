@@ -58,10 +58,21 @@ a:hover{ text-decoration: none; }
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(125,211,252,.9), rgba(167,139,250,.7) 55%, rgba(255,255,255,.15) 100%);
+  background: center/cover no-repeat;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   flex: 0 0 auto;
+  border: 1px solid rgba(255,255,255,.14);
+}
+
+/* Default fallback (si no se asigna imagen) */
+.avatar{
+  background-image:
+    radial-gradient(circle at 30% 30%, rgba(125,211,252,.9), rgba(167,139,250,.7) 55%, rgba(255,255,255,.15) 100%);
+}
+
+/* Brand (homepage) */
+.brandAvatar{
+  background-image: url("/assets/img/brand-avatar.png");
 }
 
 .brand h1{
