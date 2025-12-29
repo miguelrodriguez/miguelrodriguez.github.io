@@ -79,6 +79,10 @@ a:hover{ text-decoration: none; }
   background-image: url("/assets/img/flightnexus.png");
 }
 
+.barfbuddyAvatar{
+  background-image: url("/assets/img/barfbuddy.png");
+}
+
 .brand h1{
   font-size: 14px;
   margin: 0;
