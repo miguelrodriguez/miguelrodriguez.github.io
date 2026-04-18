@@ -79,6 +79,10 @@ a:hover{ text-decoration: none; }
   background-image: url("/assets/img/flightnexus.png");
 }
 
+.projectArtemisAvatar{
+  background-image: url("/assets/img/project-artemis.png");
+}
+
 .barfbuddyAvatar{
   background-image: url("/assets/img/barfbuddy.png");
 }
