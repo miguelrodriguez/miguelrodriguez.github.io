@@ -91,6 +91,10 @@ a:hover{ text-decoration: none; }
   background-image: url("/assets/img/cleanspace.png");
 }
 
+.archnexusAvatar{
+  background-image: url("/assets/img/archnexus.png");
+}
+
 .brand h1{
   font-size: 14px;
   margin: 0;
