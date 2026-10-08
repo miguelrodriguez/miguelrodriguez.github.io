@@ -95,6 +95,10 @@ a:hover{ text-decoration: none; }
   background-image: url("/assets/img/archnexus.png");
 }
 
+.themusesyndicateAvatar{
+  background-image: url("/assets/img/themusesyndicate.png");
+}
+
 .brand h1{
   font-size: 14px;
   margin: 0;
